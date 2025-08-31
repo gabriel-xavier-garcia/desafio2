@@ -29,7 +29,6 @@ public class Participante {
         this.id = id;
         this.nome = nome;
         this.email = email;
-        this.atividades = atividades;
     }
 
     public Integer getId() {
