@@ -17,8 +17,9 @@ public class Bloco {
     private Instant inicio;
     private Instant fim;
 
-    @OneToMany(mappedBy = "bloco")
-    private List<Atividade> atividades = new ArrayList<>();
+    @ManyToOne()
+    @JoinColumn(name = "atividade_id")
+    private Atividade atividade;
 
     public Bloco() {
     }

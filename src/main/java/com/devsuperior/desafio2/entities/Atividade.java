@@ -16,16 +16,15 @@ public class Atividade {
     @Column(columnDefinition = "TEXT")
     private String descricao;
 
-    private Double price;
+    private Double preco;
 
     @ManyToOne
     @JoinColumn(name = "categoria_id")
     private Categoria categoria;
 
 
-    @ManyToOne
-    @JoinColumn(name = "bloco_id")
-    private Bloco bloco;
+    @OneToMany(mappedBy = "atividade", cascade = CascadeType.ALL)
+    private List<Bloco> blocos = new ArrayList<>();
 
     @ManyToMany
     @JoinTable(name = "tb_atividade_participante",
@@ -37,13 +36,12 @@ public class Atividade {
     public Atividade() {
     }
 
-    public Atividade(Integer id, String nome, String descricao, Double price, Categoria categoria, Bloco bloco, Set<Participante> participantes) {
+    public Atividade(Integer id, String nome, String descricao, Double preco, Categoria categoria) {
         this.id = id;
         this.nome = nome;
         this.descricao = descricao;
-        this.price = price;
+        this.preco = preco;
         this.categoria = categoria;
-        this.bloco = bloco;
     }
 
     public Integer getId() {
@@ -70,12 +68,12 @@ public class Atividade {
         this.descricao = descricao;
     }
 
-    public Double getPrice() {
-        return price;
+    public Double getPreco() {
+        return preco;
     }
 
-    public void setPrice(Double price) {
-        this.price = price;
+    public void setPreco(Double preco) {
+        this.preco = preco;
     }
 
     public Categoria getCategoria() {
@@ -90,16 +88,12 @@ public class Atividade {
         this.categoria = categoria;
     }
 
-    public Bloco getBloco() {
-        return bloco;
-    }
-
-    public void setBloco(Bloco bloco) {
-        this.bloco = bloco;
-    }
-
     public Set<Participante> getParticipantes() {
         return participantes;
+    }
+
+    public List<Bloco> getBlocos() {
+        return blocos;
     }
 
     @Override
